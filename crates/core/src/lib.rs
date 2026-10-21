@@ -52,6 +52,8 @@ pub async fn open_db(path: &Path) -> Result<SqlitePool, AppError> {
     Ok(pool)
 }
 
+// shortcut: cargo does not notice new migration files; touch this file after adding one
+// (a build.rs would fix it, but Smart App Control blocks fresh build scripts on this machine).
 pub async fn migrate(pool: &SqlitePool) -> Result<(), AppError> {
     sqlx::migrate!("../../migrations").run(pool).await?;
     Ok(())

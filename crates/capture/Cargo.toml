@@ -1,0 +1,15 @@
+[package]
+name = "capture"
+version = "0.1.0"
+edition = "2024"
+
+[dependencies]
+mc-core = { path = "../core" }
+sqlx.workspace = true
+serde.workspace = true
+specta.workspace = true
+cpal = "0.18"
+hound = "3.5"
+
+[dev-dependencies]
+tokio = { workspace = true, features = ["macros", "rt"] }

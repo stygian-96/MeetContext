@@ -20,6 +20,8 @@ tauri-build = { version = "2", features = [] }
 tauri = { version = "2", features = [] }
 mc-core = { path = "../../../crates/core" }
 jobs = { path = "../../../crates/jobs" }
+capture = { path = "../../../crates/capture" }
+tokio.workspace = true
 serde.workspace = true
 specta.workspace = true
 sqlx.workspace = true

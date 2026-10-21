@@ -1,0 +1,21 @@
+/* Capture rows shrink with the window; the "Captured" column drops out when space is tight. */
+.captures-list { container-type: inline-size; }
+.captures-row {
+  display: grid;
+  grid-template-columns: minmax(0, 2fr) 80px minmax(0, 1.2fr) 120px 80px;
+  gap: 16px;
+  padding: 16px 20px;
+  align-items: center;
+  border-top: 1px solid var(--sidebar);
+}
+.captures-head { padding: 10px 20px; border-top: 0; border-bottom: 1px solid var(--line); font-size: 12px; color: var(--ink-3); }
+.captures-name { min-width: 0; display: flex; flex-direction: column; gap: 4px; }
+.captures-name > * { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.captures-name strong { font-size: 15px; font-weight: 600; }
+.captures-captured { display: flex; flex-direction: column; gap: 2px; font-size: 12.5px; }
+
+@container (max-width: 560px) {
+  .captures-row { grid-template-columns: minmax(0, 1fr) 70px 110px 80px; }
+  .captures-captured { display: none; }
+}
+.captures-row > :last-child { justify-self: end; }

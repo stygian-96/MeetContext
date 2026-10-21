@@ -7,10 +7,21 @@ import * as __TAURI_EVENT from "@tauri-apps/api/event";
 export const commands = {
 	settingsGet: (key: string) => typedError<string | null, AppError>(__TAURI_INVOKE("settings_get", { key })),
 	settingsSet: (key: string, value: string) => typedError<null, AppError>(__TAURI_INVOKE("settings_set", { key, value })),
+	captureDevices: () => __TAURI_INVOKE<Devices>("capture_devices"),
+	/**  Starts the dialog's mic meter, or switches it to another mic. */
+	micMonitorStart: (deviceId: string | null) => typedError<null, AppError>(__TAURI_INVOKE("mic_monitor_start", { deviceId })),
+	micMonitorLevel: () => __TAURI_INVOKE<number | null>("mic_monitor_level"),
+	micMonitorStop: () => __TAURI_INVOKE<void>("mic_monitor_stop"),
+	captureList: () => typedError<Capture[], AppError>(__TAURI_INVOKE("capture_list")),
+	captureStart: (name: string, micDeviceId: string | null, systemAudio: boolean, consent: boolean) => typedError<number, AppError>(__TAURI_INVOKE("capture_start", { name, micDeviceId, systemAudio, consent })),
+	captureStop: () => typedError<null, AppError>(__TAURI_INVOKE("capture_stop")),
+	captureDelete: (id: number) => typedError<null, AppError>(__TAURI_INVOKE("capture_delete", { id })),
 };
 
 /** Events */
 export const events = {
+	captureState: makeEvent<CaptureState>("capture-state"),
+	captureTick: makeEvent<CaptureTick>("capture-tick"),
 	jobUpdated: makeEvent<JobUpdated>("job-updated"),
 };
 
@@ -19,6 +30,42 @@ export const events = {
 export type AppError = {
 	code: string,
 	message: string,
+};
+
+export type AudioDevice = {
+	id: string,
+	name: string,
+};
+
+export type Capture = {
+	id: number,
+	name: string,
+	state: string,
+	started_at: number,
+	duration_ms: number | null,
+	error: string | null,
+	chunks: number,
+	bytes: number,
+};
+
+/**  Pushed when a capture starts, stops or fails. */
+export type CaptureState = {
+	capture_id: number,
+	state: string,
+	error: string | null,
+};
+
+/**  Pushed every 500 ms while recording, for the overlay. */
+export type CaptureTick = {
+	elapsed_ms: number,
+	mic_level: number | null,
+	system_level: number | null,
+};
+
+export type Devices = {
+	mics: AudioDevice[],
+	/**  Meeting (system) audio capture; Windows only for now. */
+	system_audio: boolean,
 };
 
 export type JobUpdate = {
