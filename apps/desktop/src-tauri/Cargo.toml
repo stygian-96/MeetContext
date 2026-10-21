@@ -21,10 +21,8 @@ tauri = { version = "2", features = [] }
 mc-core = { path = "../../../crates/core" }
 jobs = { path = "../../../crates/jobs" }
 serde.workspace = true
-serde_json.workspace = true
 specta.workspace = true
 sqlx.workspace = true
-tokio.workspace = true
 tauri-specta = { version = "=2.0.0-rc.25", features = ["derive", "typescript"] }
 specta-typescript = "0.0.12"
 

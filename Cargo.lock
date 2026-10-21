@@ -705,14 +705,12 @@ dependencies = [
  "jobs",
  "mc-core",
  "serde",
- "serde_json",
  "specta",
  "specta-typescript",
  "sqlx",
  "tauri",
  "tauri-build",
  "tauri-specta",
- "tokio",
 ]
 
 [[package]]

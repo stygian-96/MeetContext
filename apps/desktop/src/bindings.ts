@@ -5,11 +5,8 @@ import * as __TAURI_EVENT from "@tauri-apps/api/event";
 
 /** Commands */
 export const commands = {
-	appInfo: () => typedError<AppInfo, AppError>(__TAURI_INVOKE("app_info")),
 	settingsGet: (key: string) => typedError<string | null, AppError>(__TAURI_INVOKE("settings_get", { key })),
 	settingsSet: (key: string, value: string) => typedError<null, AppError>(__TAURI_INVOKE("settings_set", { key, value })),
-	/**  Dev only: queues a job that sleeps `sleep_ms`, then fails its first `fail_times` attempts. */
-	devEnqueueTestJob: (failTimes: number, sleepMs: number) => typedError<number, AppError>(__TAURI_INVOKE("dev_enqueue_test_job", { failTimes, sleepMs })),
 };
 
 /** Events */
@@ -22,12 +19,6 @@ export const events = {
 export type AppError = {
 	code: string,
 	message: string,
-};
-
-export type AppInfo = {
-	version: string,
-	os: string,
-	data_dir: string,
 };
 
 export type JobUpdate = {
