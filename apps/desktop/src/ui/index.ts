@@ -5,5 +5,8 @@ export { Checkbox } from "./Checkbox";
 export { Dialog } from "./Dialog";
 export { Field } from "./Field";
 export { LevelMeter } from "./LevelMeter";
+export { NavHeading, NavItem } from "./Nav";
 export { Pill, type PillTone } from "./Pill";
+export { Prose } from "./Prose";
+export { Tabs } from "./Tabs";
 export { WindowControls } from "./WindowControls";

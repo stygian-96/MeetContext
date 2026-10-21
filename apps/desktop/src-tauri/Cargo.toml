@@ -21,6 +21,7 @@ tauri = { version = "2", features = [] }
 mc-core = { path = "../../../crates/core" }
 jobs = { path = "../../../crates/jobs" }
 capture = { path = "../../../crates/capture" }
+prd = { path = "../../../crates/prd" }
 tokio.workspace = true
 serde.workspace = true
 specta.workspace = true

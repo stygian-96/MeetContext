@@ -1,0 +1,5 @@
+# Keep LF everywhere: migrations are checksummed, and a CRLF checkout breaks existing databases.
+* text=auto eol=lf
+*.png binary
+*.ico binary
+*.icns binary

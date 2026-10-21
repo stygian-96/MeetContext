@@ -1,6 +1,7 @@
 use capture::{Capture, Devices, MicMonitor, Recorder};
 use jobs::{Handlers, JobUpdate};
 use mc_core::AppError;
+use prd::{Prd, Project};
 use serde::Serialize;
 use sqlx::SqlitePool;
 use std::path::PathBuf;
@@ -61,6 +62,36 @@ async fn settings_get(pool: State<'_, SqlitePool>, key: String) -> Result<Option
 #[specta::specta]
 async fn settings_set(pool: State<'_, SqlitePool>, key: String, value: String) -> Result<(), AppError> {
     mc_core::setting_set(&pool, &key, &value).await
+}
+
+#[tauri::command]
+#[specta::specta]
+async fn project_list(pool: State<'_, SqlitePool>) -> Result<Vec<Project>, AppError> {
+    prd::list(&pool).await
+}
+
+#[tauri::command]
+#[specta::specta]
+async fn project_create(pool: State<'_, SqlitePool>, name: String, description: String) -> Result<i32, AppError> {
+    prd::create(&pool, &name, &description).await
+}
+
+#[tauri::command]
+#[specta::specta]
+async fn project_update(pool: State<'_, SqlitePool>, id: i32, name: String, description: String) -> Result<(), AppError> {
+    prd::update(&pool, id, &name, &description).await
+}
+
+#[tauri::command]
+#[specta::specta]
+async fn prd_get(pool: State<'_, SqlitePool>, project_id: i32) -> Result<Prd, AppError> {
+    prd::get(&pool, project_id).await
+}
+
+#[tauri::command]
+#[specta::specta]
+async fn prd_save(pool: State<'_, SqlitePool>, project_id: i32, markdown: String, base_version: i32) -> Result<Prd, AppError> {
+    prd::save(&pool, project_id, &markdown, base_version, "edit").await
 }
 
 #[tauri::command]
@@ -214,6 +245,11 @@ pub fn run() {
         .commands(collect_commands![
             settings_get,
             settings_set,
+            project_list,
+            project_create,
+            project_update,
+            prd_get,
+            prd_save,
             capture_devices,
             mic_monitor_start,
             mic_monitor_level,

@@ -1,0 +1,22 @@
+/* The PRD page and editor, from the canvas's ProjectPRD and PRDEditor artboards. */
+.prd-header { padding: 4px 40px 0; border-bottom: 1px solid var(--line); display: flex; flex-direction: column; gap: 14px; }
+.prd-header-row { display: flex; flex-wrap: wrap; align-items: center; gap: 12px; justify-content: space-between; }
+.prd-crumbs { font-size: 13px; color: var(--ink-3); display: flex; gap: 6px; align-items: center; }
+.prd-crumbs strong { color: var(--ink); font-weight: 500; }
+.prd-title { margin: 0; font-family: var(--serif); font-size: 32px; font-weight: 600; letter-spacing: -0.01em; }
+.prd-body { flex: 1; display: flex; flex-wrap: wrap; }
+.prd-article { flex: 999 1 480px; min-width: 0; padding: 36px 40px 80px; display: flex; justify-content: center; }
+.prd-article > * { width: 100%; max-width: 760px; }
+.prd-aside { flex: 1 1 260px; box-sizing: border-box; border-left: 1px solid var(--line); background: var(--surface-muted); padding: 28px 24px; display: flex; flex-direction: column; gap: 14px; font-size: 13px; }
+.prd-aside h2 { font-family: var(--mono); font-size: 12px; letter-spacing: 0.06em; color: var(--ink-3); font-weight: 500; text-transform: uppercase; }
+.prd-empty { display: flex; flex-direction: column; gap: 12px; align-items: flex-start; color: var(--ink-2); font-size: 14px; }
+
+/* Editor */
+.prd-title-input { font-family: var(--serif); font-size: 32px; font-weight: 600; border: 0; padding: 0; background: none; outline-offset: 4px; }
+.prd-toolbar { display: flex; flex-wrap: wrap; gap: 2px; padding-bottom: 10px; }
+.prd-toolbar button { font: inherit; font-size: 13px; background: none; border: 1px solid transparent; border-radius: 6px; padding: 6px 10px; cursor: pointer; color: var(--ink); }
+.prd-toolbar button:hover { border-color: var(--line-strong); background: var(--surface); }
+.prd-textarea { width: 100%; box-sizing: border-box; min-height: 60vh; resize: vertical; font-family: var(--mono); font-size: 14px; line-height: 1.7; border: 0; padding: 0; background: none; }
+.prd-textarea:focus-visible { outline: none; }
+.prd-outline { display: flex; flex-direction: column; gap: 4px; }
+.prd-outline span { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; color: var(--ink-2); }

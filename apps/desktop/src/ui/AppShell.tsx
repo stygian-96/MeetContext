@@ -1,24 +1,25 @@
 import type { ReactNode } from "react";
 import { OWN_TITLE_BAR, WindowControls } from "./WindowControls";
 
-/** Sidebar + main area; the top strip doubles as the window's title bar. Phase 2 adds projects. */
-export function AppShell({ children }: { children: ReactNode }) {
+type Props = {
+  /** Nav items under the brand. */
+  sidebar: ReactNode;
+  /** No padding: the page draws its own full-width header (like the PRD page). */
+  flush?: boolean;
+  children: ReactNode;
+};
+
+/** Sidebar + main area; the top strip doubles as the window's title bar. */
+export function AppShell({ sidebar, flush, children }: Props) {
   return (
     <div className="ui-shell">
       <nav aria-label="Primary" className="ui-sidebar">
         <div data-tauri-drag-region className="ui-brand"><span className="ui-brand-mark">Δ</span><span className="ui-label">MeetContext</span></div>
-        <a href="#" className="ui-nav-item" aria-current="page" title="Captures">
-          <svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true">
-            <rect x="2" y="3" width="12" height="9" rx="1.5" fill="none" stroke="currentColor" strokeWidth="1.3" />
-            <circle cx="8" cy="7.5" r="2" fill="none" stroke="currentColor" strokeWidth="1.3" />
-            <path d="M5 14h6" stroke="currentColor" strokeWidth="1.3" />
-          </svg>
-          <span className="ui-label">Captures</span>
-        </a>
+        {sidebar}
       </nav>
-      <div className="ui-shell-main">
+      <div className={`ui-shell-main ${flush ? "ui-shell-flush" : ""}`}>
         <div data-tauri-drag-region className="ui-titlebar">{OWN_TITLE_BAR && <WindowControls />}</div>
-        <main className="ui-main">{children}</main>
+        <main className={flush ? "ui-main-flush" : "ui-main"}>{children}</main>
       </div>
     </div>
   );

@@ -7,6 +7,11 @@ import * as __TAURI_EVENT from "@tauri-apps/api/event";
 export const commands = {
 	settingsGet: (key: string) => typedError<string | null, AppError>(__TAURI_INVOKE("settings_get", { key })),
 	settingsSet: (key: string, value: string) => typedError<null, AppError>(__TAURI_INVOKE("settings_set", { key, value })),
+	projectList: () => typedError<Project[], AppError>(__TAURI_INVOKE("project_list")),
+	projectCreate: (name: string, description: string) => typedError<number, AppError>(__TAURI_INVOKE("project_create", { name, description })),
+	projectUpdate: (id: number, name: string, description: string) => typedError<null, AppError>(__TAURI_INVOKE("project_update", { id, name, description })),
+	prdGet: (projectId: number) => typedError<Prd, AppError>(__TAURI_INVOKE("prd_get", { projectId })),
+	prdSave: (projectId: number, markdown: string, baseVersion: number) => typedError<Prd, AppError>(__TAURI_INVOKE("prd_save", { projectId, markdown, baseVersion })),
 	captureDevices: () => __TAURI_INVOKE<Devices>("capture_devices"),
 	/**  Starts the dialog's mic meter, or switches it to another mic. */
 	micMonitorStart: (deviceId: string | null) => typedError<null, AppError>(__TAURI_INVOKE("mic_monitor_start", { deviceId })),
@@ -78,6 +83,27 @@ export type JobUpdate = {
 
 /**  Pushed to the UI whenever a job changes status. */
 export type JobUpdated = JobUpdate;
+
+export type Prd = {
+	project: Project,
+	markdown: string,
+	sections: SectionInfo[],
+};
+
+export type Project = {
+	id: number,
+	name: string,
+	description: string,
+	/**  0 until the PRD is first saved. */
+	version: number,
+	updated_at: number,
+};
+
+export type SectionInfo = {
+	id: number,
+	heading: string,
+	level: number,
+};
 
 /* Tauri Specta runtime */
 async function typedError<T, E>(result: Promise<T>): Promise<{ status: "ok"; data: T } | { status: "error"; error: E }> {

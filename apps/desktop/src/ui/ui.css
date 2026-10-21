@@ -4,6 +4,8 @@
 @import "@fontsource/ibm-plex-sans/600.css";
 @import "@fontsource/ibm-plex-mono/400.css";
 @import "@fontsource/ibm-plex-mono/500.css";
+@import "@fontsource/source-serif-4/400.css";
+@import "@fontsource/source-serif-4/600.css";
 
 :root {
   --bg: #f6f6f3;
@@ -28,6 +30,7 @@
   --disabled: #b9bcc4;
   --sans: "IBM Plex Sans", "Helvetica Neue", sans-serif;
   --mono: "IBM Plex Mono", monospace;
+  --serif: "Source Serif 4", Georgia, serif;
   font-family: var(--sans);
   font-size: 14px;
   color: var(--ink);
@@ -36,7 +39,7 @@
 body { margin: 0; }
 h1 { margin: 0; font-size: 26px; font-weight: 600; }
 h2 { margin: 0; font-size: 18px; font-weight: 600; }
-input, select {
+input, select, textarea {
   font: inherit;
   color: var(--ink);
   background: var(--surface);
@@ -126,6 +129,40 @@ input, select {
 .ui-window-controls button { width: 46px; height: 36px; border: 0; background: none; color: var(--ink); display: inline-flex; align-items: center; justify-content: center; cursor: default; }
 .ui-window-controls button:hover { background: rgba(0, 0, 0, 0.06); }
 .ui-window-controls .ui-window-close:hover { background: #c42b1c; color: #fff; }
+
+/* Nav items are buttons; headings and badges hide with labels on the rail */
+.ui-nav-item { font: inherit; width: 100%; background: none; text-align: left; cursor: pointer; }
+.ui-nav-item:hover:not([aria-current="page"]) { background: rgba(0, 0, 0, 0.04); }
+.ui-nav-text { flex: 1; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.ui-nav-badge { font-size: 11px; color: var(--ink-3); }
+.ui-nav-heading { font-family: var(--mono); font-size: 11px; letter-spacing: 0.06em; text-transform: uppercase; color: var(--ink-3); padding: 18px 10px 6px; }
+.ui-nav-dashed { margin-top: 8px; border: 1px dashed #b9bcc4; font-size: 13px; }
+
+/* Full-width pages (the PRD page) */
+.ui-shell-flush { background: var(--surface); }
+.ui-main-flush { flex: 1; min-height: 0; overflow-y: auto; display: flex; flex-direction: column; }
+
+/* Tabs */
+.ui-tabs { display: flex; flex-wrap: wrap; gap: 4px; }
+.ui-tabs button { font: inherit; font-size: 14px; background: none; border: 0; border-bottom: 2px solid transparent; padding: 10px 12px; color: var(--ink-2); cursor: pointer; }
+.ui-tabs button[aria-selected="true"] { color: var(--ink); font-weight: 600; border-bottom-color: var(--ink); }
+
+/* Prose: a PRD in the serif reading style */
+.ui-prose { font-family: var(--serif); font-size: 17px; line-height: 1.65; color: #26272a; }
+.ui-prose h1, .ui-prose h2 { font-size: 22px; font-weight: 600; margin: 18px 0 6px; line-height: 1.3; }
+.ui-prose h3 { font-size: 18px; font-weight: 600; margin: 6px 0 4px; }
+.ui-prose h4, .ui-prose h5, .ui-prose h6 { font-size: 16px; font-weight: 600; margin: 6px 0 4px; }
+.ui-prose > :first-child { margin-top: 0; }
+.ui-prose p { margin: 0 0 14px; }
+.ui-prose ul, .ui-prose ol { margin: 0 0 14px; padding-left: 22px; }
+.ui-prose code { font-family: var(--mono); font-size: 0.85em; background: var(--bg); border-radius: 4px; padding: 1px 4px; }
+.ui-prose pre { background: var(--bg); border-radius: 8px; padding: 12px 14px; overflow-x: auto; }
+.ui-prose pre code { padding: 0; }
+.ui-prose blockquote { margin: 0 0 14px; padding-left: 14px; border-left: 3px solid var(--line-strong); color: var(--ink-2); }
+.ui-prose table { border-collapse: collapse; margin: 0 0 14px; font-size: 15px; }
+.ui-prose th, .ui-prose td { border: 1px solid var(--line); padding: 6px 10px; text-align: left; }
+.ui-prose hr { border: 0; border-top: 1px solid var(--line); margin: 24px 0; }
+.ui-prose a { color: var(--accent); }
 
 /* Narrow windows: the sidebar becomes an icon rail */
 @media (max-width: 900px) {

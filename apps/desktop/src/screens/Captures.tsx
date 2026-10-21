@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { commands, events, type Capture } from "../bindings";
 import { formatDuration } from "../format";
-import { AppShell, Button, Pill, type PillTone } from "../ui";
+import { Button, Pill, type PillTone } from "../ui";
 import { NewCapture } from "./NewCapture";
 import "./Captures.css";
 
@@ -35,7 +35,7 @@ export function Captures() {
   }
 
   return (
-    <AppShell>
+    <>
       <header style={{ display: "flex", flexWrap: "wrap", gap: 16, alignItems: "flex-end", justifyContent: "space-between" }}>
         <div style={{ display: "flex", flexDirection: "column", gap: 6 }}>
           <h1>Captures</h1>
@@ -80,6 +80,6 @@ export function Captures() {
       </section>
 
       {creating && <NewCapture onClose={() => setCreating(false)} />}
-    </AppShell>
+    </>
   );
 }

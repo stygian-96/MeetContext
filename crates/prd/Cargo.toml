@@ -1,0 +1,13 @@
+[package]
+name = "prd"
+version = "0.1.0"
+edition = "2024"
+
+[dependencies]
+mc-core = { path = "../core" }
+sqlx.workspace = true
+serde.workspace = true
+specta.workspace = true
+
+[dev-dependencies]
+tokio = { workspace = true, features = ["macros", "rt"] }
